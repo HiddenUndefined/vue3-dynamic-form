@@ -2,6 +2,8 @@ export interface Field {
   id: string
   type: string
   name: string
+  label: string
+  placeholder?: string
   value?: string
   disabled?: boolean
   required?: boolean
