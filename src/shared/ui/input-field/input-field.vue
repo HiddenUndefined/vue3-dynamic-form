@@ -53,6 +53,8 @@ export default {
     :id="id"
     :type="type"
     :name="name"
+    :placeholder="placeholder"
+
     :disabled="disabled"
     :readonly="readonly"
 
@@ -90,6 +92,10 @@ export default {
     border 1px solid var(--color-border)
     outline none
     // Attr
+    // # Focus
+    &::placeholder
+      color var(--color-text)
+      opacity 0.5
     // # Focus
     &:focus
       border-color var(--color-primary)

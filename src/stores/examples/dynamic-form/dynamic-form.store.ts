@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 // Models
-import type { StateImp } from './dynamic-form.models'
+import type { Field, StateImp } from './dynamic-form.models'
 
 const useExampleDynamicFormStore = defineStore({
   id: 'example-dynamic-form',
@@ -31,7 +31,11 @@ const useExampleDynamicFormStore = defineStore({
   getters: {
     getFieldsCollection: ({ fieldsCollection }) => fieldsCollection
   },
-  actions: {}
+  actions: {
+    pushNewField (field: Field): void {
+      this.fieldsCollection.push(field)
+    }
+  }
 })
 
 export default useExampleDynamicFormStore

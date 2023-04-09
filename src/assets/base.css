@@ -33,6 +33,7 @@
 
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
+  --color-text-reverse: var(--vt-c-text-dark-1);
 
   --color-primary: var(--vt-c-green);
 
@@ -50,6 +51,7 @@
 
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-dark-2);
+    --color-text-reverse: var(--vt-c-text-light-1);
   }
 }
 

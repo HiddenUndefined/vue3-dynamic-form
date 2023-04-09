@@ -1,25 +1,83 @@
-<script lang="ts"></script>
+<script lang="ts">
+// Core
+import { defineComponent, reactive } from 'vue'
+// Components
+import UiInputField from '@shared/ui/input-field/input-field.vue'
+import UiButton from '@shared/ui/button/button.vue'
+// Store
+import useExampleDynamicFormStore from '@stores/examples/dynamic-form/dynamic-form.store'
+
+export default defineComponent({
+  components: {
+    UiButton,
+    UiInputField
+  },
+  setup () {
+    // Store
+    const store = useExampleDynamicFormStore()
+
+    // Variables
+    const formFields = reactive({
+      id: null,
+      type: null,
+      name: null,
+      label: null,
+      placeholder: null,
+      value: null
+    })
+
+    // Methods
+    /**
+     * Create new field in store
+     */
+    const createNewField = (): void => {
+      const {
+        id, type, name,
+        label, placeholder,
+        value
+      } = formFields
+
+      // Validation
+      if (id && type && name && label && placeholder && value) {
+        store.pushNewField({
+          id, type, name, label, placeholder, value
+        })
+      } else {
+        alert('Form are invalid!')
+      }
+    }
+
+    // Return
+    return {
+      // Variables
+      formFields,
+      // Methods
+      createNewField
+    }
+  }
+})
+</script>
 
 <template lang="pug">
 .form-wrapper
   // Field: ID
-  span ID-field
+  ui-input-field(id="field-id" v-model="formFields.id" name="id" label="ID" placeholder="Enter id")
   // Field: Type
-  span Type-field
+  ui-input-field(id="field-type" v-model="formFields.type" name="type" label="Type" placeholder="Enter type")
   // Field: Name
-  span Name-field
+  ui-input-field(id="field-name" v-model="formFields.name" name="name" label="Name" placeholder="Enter name")
   // Field: Label
-  span Label-field
+  ui-input-field(id="field-label" v-model="formFields.label" name="label" label="Label" placeholder="Enter label")
   // Field: Placeholder
-  span Placeholder-field
+  ui-input-field(id="field-placeholder" v-model="formFields.placeholder" name="placeholder" label="Placeholder" placeholder="Enter placeholder")
   // Field: Required
-  span Required-field
+  ui-input-field(id="field-required" name="required" label="Required" placeholder="Enter required")
   // Field: Disabled
-  span Disabled-field
+  ui-input-field(id="field-disabled" name="disabled" label="Disabled" placeholder="Enter disabled")
   // Field: Value
-  span Value-field
+  ui-input-field(id="field-value" v-model="formFields.value" name="value" label="Value" placeholder="Enter value")
   // Button: Submit
-  span Submit-button
+  ui-button(@click.native="createNewField()") Create field
 </template>
 
 <style lang="stylus" scoped>
@@ -28,13 +86,7 @@
   gap 12px
   display grid
   grid-template-columns 1fr
-  // Span
-  span
-    min-height 48px
-    background-color var(--color-border)
-    display flex
-    justify-content center
-    align-items center
+  align-items flex-end
   // Adaptive
   // 475px
   @media screen and (min-width 475px)
